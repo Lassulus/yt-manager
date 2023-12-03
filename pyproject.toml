@@ -1,0 +1,44 @@
+[build-system]
+requires = [ "setuptools" ]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "yt-manager"
+description = "download youtube playlists or channels"
+dynamic = [ "version" ]
+scripts = { yt_manager = "yt_manager:main" }
+
+
+[tool.pytest.ini_options]
+testpaths = "tests"
+faulthandler_timeout = 60
+log_level = "DEBUG"
+log_format = "%(levelname)s: %(message)s\n       %(pathname)s:%(lineno)d::%(funcName)s"
+addopts = "--cov . --cov-report term --cov-report html:.reports/html --no-cov-on-fail --durations 5 --color=yes --new-first" # Add --pdb for debugging
+norecursedirs = "tests/helpers"
+
+[tool.mypy]
+plugins = ["deal.mypy"]
+python_version = "3.10"
+warn_redundant_casts = true
+disallow_untyped_calls = true
+disallow_untyped_defs = true
+no_implicit_optional = true
+
+[[tool.mypy.overrides]]
+module = "ipdb.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "pytest.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "setuptools.*"
+ignore_missing_imports = true
+
+[tool.ruff]
+line-length = 88
+
+select = [ "E", "F", "I",  "N"]
+ignore = [ "E501" ]
