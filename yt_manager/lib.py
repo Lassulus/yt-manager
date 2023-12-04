@@ -67,7 +67,10 @@ def get_channel_releases(channel_id: str) -> dict[str, Track]:
     return all_tracks
 
 def get_ydl_info(url: str) -> dict:
-    ydl = YoutubeDL({"extract_flat": True})
+    ydl = YoutubeDL({
+        "extract_flat": True,
+        "ignoreerrors": True,
+    })
     return ydl.extract_info(url, download=False)
 
 # get all tracks from a youtube link
