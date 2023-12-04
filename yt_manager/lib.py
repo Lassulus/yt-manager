@@ -127,6 +127,9 @@ def get_single_track(url: str) -> Track:
 # get all tracks from a channels video catalog
 def get_channel_tracks(channel_id: str) -> dict[str, Track]:
     tracks = get_tracks_via_ytdl(f'https://www.youtube.com/channel/{channel_id}/videos')
+    # if there are no video tracks, we try to get the tracks from the complete channel
+    if tracks == {}:
+        tracks = get_tracks_via_ytdl(f'https://www.youtube.com/channel/{channel_id}')
     return tracks
 
 # download a single track as ogg
