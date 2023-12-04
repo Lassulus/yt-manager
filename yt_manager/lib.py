@@ -98,8 +98,6 @@ def get_tracks_via_ytdl(url: str) -> dict[str, Track]:
             if artist is None:
                 artist = channel_info["channel"]
 
-            print(artist)
-
             all_tracks[track["id"]] = Track(
                 track["id"],
                 channel_id,
