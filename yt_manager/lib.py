@@ -54,6 +54,8 @@ def get_channel_releases(channel_id: str) -> dict[str, Track]:
         for track in tracks:
             if any(keyword in track['title'].lower() for keyword in restricted_keywords):
                 continue
+            if "duration_seconds" not in track or track["duration_seconds"] > 1000 or track["duration_seconds"] < 60:
+                continue
             all_tracks[track["videoId"]] = Track(
                 track["videoId"],
                 channel_id,
